@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  api:
+    container_name: internship-gateway-api
+    build: .
+    volumes: 
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+    command: yarn run start:dev
+    env_file:
+      - .env
+    networks: 
+      - gateway-net
+
+networks:
+  gateway-net:
