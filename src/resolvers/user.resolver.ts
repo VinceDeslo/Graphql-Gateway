@@ -1,13 +1,17 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
-import { UserService } from 'src/services/user-service.service';
+import { Schema as MongooseSchema } from 'mongoose';
+
+import { UserService } from 'src/services/user.service';
 import { User } from 'src/models/user';
 
 @Resolver()
 export class UserResolver {
     constructor(private userService: UserService) {}
 
-    @Query(returns => User)
-    async getUserById(@Args('id') id: number) {
-        return await this.userService.getUser(id)
+    @Query(() => User)
+    async user(
+        @Args('id', { type: () => String }) id: MongooseSchema.Types.ObjectId,
+    ) {
+        return this.userService.getById(id);
     }
 }

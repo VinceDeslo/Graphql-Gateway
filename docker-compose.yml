@@ -1,4 +1,5 @@
 version: '3.9'
+
 services:
   api:
     container_name: internship-gateway-api
@@ -12,6 +13,18 @@ services:
       - .env
     networks: 
       - gateway-net
+  mongo:
+    image: mongo:latest
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
 
 networks:
   gateway-net:
