@@ -11,7 +11,7 @@ import gqlConfig from '../configurations/gql.config'
   imports: [
     GraphQLModule.forRoot(gqlConfig),
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGO_URL),
+    MongooseModule.forRoot(process.env.MONGODB_CONNSTRING),
     UserModule
   ],
   controllers: [],

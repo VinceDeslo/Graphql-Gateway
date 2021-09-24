@@ -1,9 +1,12 @@
 version: '3.9'
 
 services:
+
   api:
     container_name: internship-gateway-api
     build: .
+    depends_on: 
+      - "mongo"
     volumes: 
       - .:/usr/src/app
     ports:
@@ -12,19 +15,28 @@ services:
     env_file:
       - .env
     networks: 
-      - gateway-net
+      - micro-net
+
   mongo:
+    container_name: mongodb
     image: mongo:latest
+    env_file:
+      - .env
     environment: 
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data:/data/db
+      - ./data/mongo/init_mongo.js:/docker-entrypoint-initdb.d/init
+      - ./data/mongo/data:/data/db
+    restart: always
+    networks: 
+      - micro-net
 
 volumes:
   mongodb_data:
 
 networks:
-  gateway-net:
+  micro-net:
