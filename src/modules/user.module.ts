@@ -10,7 +10,7 @@ import { UserService } from 'src/services/user.service';
         MongooseModule.forFeature([{
             name: User.name,
             schema: UserSchema,
-            collection: 'user',
+            collection: 'users',
         }])
     ],
     providers: [
