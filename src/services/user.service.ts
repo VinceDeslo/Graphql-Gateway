@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { ID } from '@nestjs/graphql';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
 import { User, UserDocument } from 'src/models/user';

@@ -3,7 +3,7 @@ import { Schema as MongooseSchema } from 'mongoose';
 
 import { UserService } from 'src/services/user.service';
 import { User } from 'src/models/user';
-import { ListUserInput, UpdateUserInput } from 'src/inputs/user.inputs';
+import { CreateUserInput, ListUserInput, UpdateUserInput } from 'src/inputs/user.inputs';
 
 @Resolver()
 export class UserResolver {
@@ -24,8 +24,8 @@ export class UserResolver {
     }
 
     @Mutation(() => User)
-    async createUser(@Args('payload') payload: UpdateUserInput) {
-        return this.userService.update(payload);
+    async createUser(@Args('payload') payload: CreateUserInput) {
+        return this.userService.create(payload);
     }
 
     @Mutation(() => User)
