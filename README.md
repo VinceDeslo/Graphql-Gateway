@@ -10,3 +10,4 @@ Current state:
 - [x] Project containerized into separate microservices
 - [ ] Implement an authentication service with AWS cognito 
 - [ ] Wrap backend route providers with access control
+- [ ] Implement tests and get CircleCI pipeline green
